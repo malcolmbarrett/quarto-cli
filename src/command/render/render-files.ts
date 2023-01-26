@@ -361,10 +361,7 @@ export async function renderFiles(
         executeResult.supporting.push(...results.supporting);
       };
 
-      const outputs: Array<{
-        path: string;
-        format: Format;
-      }> = [];
+      const outputs: Array<RenderedFormat> = [];
 
       for (const format of Object.keys(contexts)) {
         pushTiming("render-context");
@@ -374,6 +371,7 @@ export async function renderFiles(
         const recipe = outputRecipe(context);
         outputs.push({
           path: recipe.finalOutput || recipe.output,
+          isTransient: recipe.isOutputTransient,
           format: context.format,
         });
 
