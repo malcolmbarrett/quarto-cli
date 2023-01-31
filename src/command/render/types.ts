@@ -197,6 +197,9 @@ export interface PandocOptions {
 
   // optional offset from file to project dir
   offset?: string;
+
+  // quarto API messages to forward
+  messages: unknown[];
 }
 
 // command line flags that we need to inspect

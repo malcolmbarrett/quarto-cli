@@ -83,6 +83,7 @@ import("./quarto-finalize/meta-cleanup.lua")
 import("./normalize/normalize.lua")
 import("./normalize/parsehtml.lua")
 import("./normalize/extractquartodom.lua")
+import("./normalize/readapimessages.lua")
 
 import("./layout/asciidoc.lua")
 import("./layout/meta.lua")
@@ -169,6 +170,7 @@ local quartoNormalize = {
   { name = "normalize", filter = filterIf(function()
     return preState.active_filters.normalization
   end, normalizeFilter()) },
+  { name = "read-api-messages ", filter = read_api_messages() },
   { name = "normalize-parseHtmlTables", filter = parse_html_tables() },
   { name = "normalize-extractQuartoDom", filter = extract_quarto_dom() },
   { name = "normalize-parseExtendedNodes", filter = parseExtendedNodes() }

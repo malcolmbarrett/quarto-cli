@@ -96,7 +96,7 @@ import {
 } from "../../core/timing.ts";
 import { satisfies } from "semver/mod.ts";
 import { quartoConfig } from "../../core/quarto.ts";
-import { processMessages } from "../../execute/process-messages.ts";
+// import { processMessages } from "../../execute/process-messages.ts";
 
 export async function renderExecute(
   context: RenderContext,
@@ -452,11 +452,11 @@ export async function renderFiles(
               }
             });
 
-            mappedMarkdown = processMessages(
-              mappedMarkdown!,
-              baseExecuteResult.messages,
-            );
-            console.log(mappedMarkdown.value);
+            // mappedMarkdown = processMessages(
+            //   mappedMarkdown!,
+            //   baseExecuteResult.messages,
+            // );
+            // console.log(mappedMarkdown.value);
 
             const resourceFiles: string[] = [];
             if (baseExecuteResult.resourceFiles) {

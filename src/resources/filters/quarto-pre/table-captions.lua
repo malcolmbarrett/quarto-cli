@@ -9,6 +9,19 @@ local latexCaptionPattern =  "(\\caption{)(.-)(}[^\n]*\n)"
 function tableCaptions() 
   
   return {
+    -- Table = function(tbl)
+    --   local caption_message = get_messages_for_table(tbl.identifier):find_if(function(msg) 
+    --     return msg.message == "set_table_caption"
+    --   end)
+    --   if caption_message == nil then
+    --     return nil
+    --   end
+    --   local caption_str = caption_message.payload.caption
+    --   local caption = pandoc.read(caption_str, "markdown").blocks
+    --   tbl.caption.long = caption
+    --   quarto.utils.dump(caption)
+    --   return tbl
+    -- end,
    
     Div = function(el)
       if tcontains(el.attr.classes, "cell") then

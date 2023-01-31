@@ -856,6 +856,16 @@ export async function runPandoc(
     }
   }
 
+  // forward any API messages to pandoc
+  // beforePandocHooks.push(() => {
+  const messagesFileTemp = options.services.temp.createFile({
+    prefix: "quarto-input",
+    suffix: ".json",
+  });
+  Deno.writeTextFileSync(messagesFileTemp, JSON.stringify(options.messages));
+  pandocMetadata._quarto_api_messages = messagesFileTemp;
+  // });
+
   // Resolve any date fields
   const dateRaw = pandocMetadata[kDate];
   const dateFields = [kDate, kDateModified];
@@ -985,14 +995,15 @@ export async function runPandoc(
     delete pandocPassedMetadata._quarto.tests;
   }
 
+  const metadataContents = stringify(pandocPassedMetadata, {
+    indent: 2,
+    lineWidth: -1,
+    sortKeys: false,
+    skipInvalid: true,
+  });
   Deno.writeTextFileSync(
     metadataTemp,
-    stringify(pandocPassedMetadata, {
-      indent: 2,
-      lineWidth: -1,
-      sortKeys: false,
-      skipInvalid: true,
-    }),
+    metadataContents,
   );
   cmd.push("--metadata-file", metadataTemp);
 

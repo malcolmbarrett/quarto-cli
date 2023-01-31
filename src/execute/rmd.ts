@@ -256,7 +256,6 @@ async function callR<T>(
         await Deno.remove(resultsFile);
         const resultsJson = JSON.parse(results);
         resultsJson.messages = messages;
-        console.log({ resultsJson });
         return resultsJson as T;
       } else {
         // quiet means don't print in normal cases, but
